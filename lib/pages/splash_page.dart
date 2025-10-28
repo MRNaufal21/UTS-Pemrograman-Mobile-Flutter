@@ -60,7 +60,7 @@ class _SplashPageState extends State<SplashPage>
               ),
               const SizedBox(height: 24),
               const Text(
-                'Flutter Simple App',
+                'Pemrograman Mobile',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -74,11 +74,11 @@ class _SplashPageState extends State<SplashPage>
               ),
               const SizedBox(height: 16),
               const Text(
-                'NIM: 152019043',
+                '152019043',
                 style: TextStyle(color: Colors.white70, fontSize: 16),
               ),
               const Text(
-                'Nama: Muhammad Rizqi Naufal',
+                'Muhammad Rizqi Naufal',
                 style: TextStyle(color: Colors.white70, fontSize: 16),
               ),
               const SizedBox(height: 32),
