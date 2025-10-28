@@ -1,3 +1,5 @@
+ # UTS-Pemrograman-Mobile-Flutter (ABOUT)
+
 ![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/splashscreen.png?raw=true)
 
 - Tampilan awal aplikasi selama 5 detik yang menampilkan judul aplikasi, foto Anda, NIM, dan nama.
@@ -17,14 +19,14 @@
 
 ![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/cuaca.png?raw=true)
 
-Menampilkan informasi cuaca statis (saat ini Jakarta, 30°C, Cerah). Informasi yang ditampilkan meliputi suhu, kelembaban, dan kecepatan angin.
+- Menampilkan informasi cuaca statis (saat ini Jakarta, 30°C, Cerah). Informasi yang ditampilkan meliputi suhu, kelembaban, dan kecepatan angin.
 
 ![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/berita.png?raw=true)
 
-Menampilkan daftar berita statis dalam pola tampilan yang berulang (list view), mirip dengan halaman Kontak. Setiap item menampilkan gambar, judul, dan ringkasan singkat.
+- Menampilkan daftar berita statis dalam pola tampilan yang berulang (list view), mirip dengan halaman Kontak. Setiap item menampilkan gambar, judul, dan ringkasan singkat.
 
 
- # UTS-Pemrograman-Mobile-Flutter
+
 
 
 
