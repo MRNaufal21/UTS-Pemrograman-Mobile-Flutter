@@ -1,6 +1,6 @@
  # UTS-Pemrograman-Mobile-Flutter (ABOUT)
 
-![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/splashscreen.png?raw=true)
+![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/splashsceen.png?raw=true)
 
 - Tampilan awal aplikasi selama 5 detik yang menampilkan judul aplikasi, foto Anda, NIM, dan nama.
 
@@ -24,6 +24,7 @@
 ![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/berita.png?raw=true)
 
 - Menampilkan daftar berita statis dalam pola tampilan yang berulang (list view), mirip dengan halaman Kontak. Setiap item menampilkan gambar, judul, dan ringkasan singkat.
+
 
 
 
