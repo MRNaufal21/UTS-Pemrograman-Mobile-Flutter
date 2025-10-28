@@ -19,7 +19,13 @@
 
 Menampilkan informasi cuaca statis (saat ini Jakarta, 30°C, Cerah). Informasi yang ditampilkan meliputi suhu, kelembaban, dan kecepatan angin.
 
+![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/berita.png?raw=true)
+
+Menampilkan daftar berita statis dalam pola tampilan yang berulang (list view), mirip dengan halaman Kontak. Setiap item menampilkan gambar, judul, dan ringkasan singkat.
+
+
  # UTS-Pemrograman-Mobile-Flutter
+
 
 
 
