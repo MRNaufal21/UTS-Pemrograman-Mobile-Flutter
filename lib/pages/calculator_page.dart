@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-/// A simple calculator page that was missing its widget wrapper and state.
-/// This file provides a complete, self-contained StatefulWidget implementation
-/// including a small CalcButton widget so the previous stray bracket/comma
-/// errors are resolved.
-
 class CalculatorPage extends StatefulWidget {
   const CalculatorPage({Key? key}) : super(key: key);
 
@@ -21,7 +16,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   void _inputDigit(String d) {
     setState(() {
-      if (_display == '0') {
+      if (_display == '0' || _display == 'Error') {
         _display = d;
       } else {
         _display += d;
@@ -45,10 +40,62 @@ class _CalculatorPageState extends State<CalculatorPage> {
     });
   }
 
+  // ======================================================
+  // FUNGSI BARU: PENGKUADRATAN (SQUARE)
+  // ======================================================
+  void _square() {
+    setState(() {
+      final value = double.tryParse(_display);
+      if (value != null) {
+        // Kuadrat: v * v atau math.pow(v, 2)
+        double result = math.pow(value, 2).toDouble();
+
+        // Format hasil
+        if (result % 1 == 0) {
+          _display = result.toInt().toString();
+        } else {
+          _display = result.toString();
+        }
+        _firstOperand = null;
+        _operator = null;
+      } else {
+        _display = 'Error';
+      }
+    });
+  }
+
+  // ======================================================
+  // FUNGSI BARU: AKAR KUADRAT (SQUARE ROOT)
+  // ======================================================
+  void _squareRoot() {
+    setState(() {
+      final value = double.tryParse(_display);
+      if (value != null) {
+        if (value < 0) {
+          _display = 'Error';
+        } else {
+          double result = math.sqrt(value);
+
+          // Format hasil
+          if (result % 1 == 0) {
+            _display = result.toInt().toString();
+          } else {
+            _display = result.toStringAsFixed(4); // Batasi desimal untuk akar
+          }
+        }
+        _firstOperand = null;
+        _operator = null;
+      } else {
+        _display = 'Error';
+      }
+    });
+  }
+
   void _equals() {
     setState(() {
       final second = double.tryParse(_display) ?? 0.0;
       double result = second;
+
       if (_firstOperand != null && _operator != null) {
         switch (_operator) {
           case '+':
@@ -74,7 +121,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
             result = second;
         }
       }
-      // show integer without decimal when possible
+
+      // Format hasil
       if (result % 1 == 0) {
         _display = result.toInt().toString();
       } else {
@@ -98,7 +146,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     final btnStyleLocal = btnStyle;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Calculator')),
+      // AppBar dihapus karena biasanya kalkulator menjadi bagian dari Dashboard
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -110,64 +158,56 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 child: Text(
                   _display,
                   style: const TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 64, // Perbesar tampilan
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 8),
+
+            // ======================================================
+            // BARIS FUNGSI BARU (KUADRAT, AKAR, HAPUS, BAGI)
+            // ======================================================
             Row(
               children: [
                 Expanded(
+                  // Tombol C
                   child: CalcButton(
                     label: 'C',
                     onTap: _clearAll,
-                    background: Colors.grey.shade200,
+                    background: Colors.red.shade200,
                     textStyle: btnStyleLocal,
                   ),
                 ),
                 const SizedBox(width: 8),
-                Expanded(
-                  child: CalcButton(
-                    label: '±',
-                    onTap: () {
-                      setState(() {
-                        if (_display.startsWith('-')) {
-                          _display = _display.substring(1);
-                        } else if (_display != '0') {
-                          _display = '-' + _display;
-                        }
-                      });
-                    },
-                    textStyle: btnStyleLocal,
-                  ),
+                CalcButton(
+                  // Tombol Kuadrat (x²)
+                  label: 'x²',
+                  onTap: _square,
+                  background: Colors.amber.shade100,
+                  textStyle: btnStyleLocal,
                 ),
                 const SizedBox(width: 8),
-                Expanded(
-                  child: CalcButton(
-                    label: '%',
-                    onTap: () {
-                      setState(() {
-                        final v = double.tryParse(_display) ?? 0.0;
-                        _display = (v / 100).toString();
-                      });
-                    },
-                    textStyle: btnStyleLocal,
-                  ),
+                CalcButton(
+                  // Tombol Akar Kuadrat (√)
+                  label: '√',
+                  onTap: _squareRoot,
+                  background: Colors.amber.shade100,
+                  textStyle: btnStyleLocal,
                 ),
                 const SizedBox(width: 8),
-                Expanded(
-                  child: CalcButton(
-                    label: '÷',
-                    onTap: () => _setOperator('÷'),
-                    background: Colors.indigo.shade50,
-                    textStyle: btnStyleLocal,
-                  ),
+                CalcButton(
+                  // Tombol Bagi (÷)
+                  label: '÷',
+                  onTap: () => _setOperator('÷'),
+                  background: Colors.indigo.shade50,
+                  textStyle: btnStyleLocal,
                 ),
               ],
             ),
             const SizedBox(height: 8),
+
+            // BARIS 7, 8, 9, KALI
             Row(
               children: [
                 CalcButton(
@@ -197,6 +237,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ],
             ),
             const SizedBox(height: 8),
+
+            // BARIS 4, 5, 6, KURANG
             Row(
               children: [
                 CalcButton(
@@ -226,6 +268,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ],
             ),
             const SizedBox(height: 8),
+
+            // BARIS 1, 2, 3, TAMBAH
             Row(
               children: [
                 CalcButton(
@@ -255,55 +299,30 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ],
             ),
             const SizedBox(height: 8),
+
+            // BARIS 0, TITIK, EQUALS
             Row(
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CalcButton(
-                          label: '0',
-                          onTap: () => _inputDigit('0'),
-                          textStyle: btnStyleLocal,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CalcButton(
-                          label: '.',
-                          onTap: _inputDot,
-                          textStyle: btnStyleLocal,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: CalcButton(
-                          label: '+/-',
-                          onTap: () {
-                            setState(() {
-                              if (_display.startsWith('-')) {
-                                _display = _display.substring(1);
-                              } else if (_display != '0') {
-                                _display = '-$_display';
-                              }
-                            });
-                          },
-                          textStyle: btnStyleLocal,
-                        ),
-                      ),
-                    ],
-                  ),
+                CalcButton(
+                  label: '0',
+                  onTap: () => _inputDigit('0'),
+                  textStyle: btnStyleLocal,
+                  // Agar tombol 0 lebih lebar
+                  flex: 2,
                 ),
                 const SizedBox(width: 8),
-                SizedBox(
-                  width: 84,
-                  child: CalcButton(
-                    label: '=',
-                    onTap: _equals,
-                    background: Colors.indigo,
-                    foreground: Colors.white,
-                    textStyle: btnStyleLocal,
-                  ),
+                CalcButton(
+                  label: '.',
+                  onTap: _inputDot,
+                  textStyle: btnStyleLocal,
+                ),
+                const SizedBox(width: 8),
+                CalcButton(
+                  label: '=',
+                  onTap: _equals,
+                  background: Colors.indigo,
+                  foreground: Colors.white,
+                  textStyle: btnStyleLocal,
                 ),
               ],
             ),
@@ -315,14 +334,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 }
 
-/// A small reusable button used by this page. If your project already
-/// defines a CalcButton, you can remove this and use the existing one.
+/// A small reusable button used by this page.
 class CalcButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
   final Color? background;
   final Color? foreground;
   final TextStyle? textStyle;
+  final int flex;
 
   const CalcButton({
     Key? key,
@@ -331,6 +350,7 @@ class CalcButton extends StatelessWidget {
     this.background,
     this.foreground,
     this.textStyle,
+    this.flex = 1, // Default flex adalah 1
   }) : super(key: key);
 
   @override
@@ -338,6 +358,7 @@ class CalcButton extends StatelessWidget {
     final bg = background ?? Colors.grey.shade100;
     final fg = foreground ?? Colors.black;
     return Expanded(
+      flex: flex,
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -345,7 +366,16 @@ class CalcButton extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: bg,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12), // Diperhalus jadi 12
+            boxShadow: [
+              // Tambah shadow untuk efek menawan
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 3,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
           child: Text(
             label,
