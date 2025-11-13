@@ -27,7 +27,7 @@
 
 - Halaman Kalkulator
 
-![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/kalkulator.png?raw=true)
+![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/kalkulatorrev.png?raw=true)
 
 - Kalkulator sederhana yang dapat melakukan operasi matematika dasar (tambah, kurang, kali, bagi) serta kuadrat dan akar kuadrat.
 
@@ -46,6 +46,7 @@
 ![alt text](https://github.com/MRNaufal21/UTS-Pemrograman-Mobile-Flutter/blob/main/assets/berita.png?raw=true)
 
 - Menampilkan daftar berita statis dalam pola tampilan yang berulang (list view), mirip dengan halaman Kontak. Setiap item menampilkan gambar, judul, dan ringkasan singkat.
+
 
 
 
